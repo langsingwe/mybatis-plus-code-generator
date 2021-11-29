@@ -1,0 +1,38 @@
+package ${package.Mapper};
+
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+#if(${mapperAnnotation})
+import org.apache.ibatis.annotations.Mapper;
+#end
+import java.util.List;
+
+/**
+ * @author ${author}
+ * @create ${cfg.dateTime}
+ * @describe $!{table.comment}mapper类
+ */
+#if(${kotlin})
+interface ${table.mapperName} : ${superMapperClass}<${entity}>
+#else
+#if(${mapperAnnotation})
+@Mapper
+#end
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+
+    ${entity} selectByPrimaryKey(String ${keyPropertyName});
+
+    List<${entity}> selectList(${entity} record);
+
+    int insert(${entity} record);
+
+    int insertSelective(${entity} record);
+
+    int updateByPrimaryKeySelective(${entity} record);
+
+    int updateByPrimaryKey(${entity} record);
+
+    int deleteByPrimaryKey(String ${keyPropertyName});
+
+}
+#end
